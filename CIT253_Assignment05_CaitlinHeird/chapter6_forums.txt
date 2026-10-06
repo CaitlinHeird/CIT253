@@ -1,0 +1,73 @@
+MariaDB [mysql]> SOURCE C:/Users/tgbar/OneDrive/Desktop/CIT253_Assignment05_CaitlinHeird/chapter6_forums.sql;
+Query OK, 1 row affected (0.002 sec)
+
+Database changed
+Charset changed
+Query OK, 0 rows affected (0.027 sec)
+
+Query OK, 0 rows affected (0.028 sec)
+
+Query OK, 0 rows affected (0.024 sec)
+
+Query OK, 6 rows affected (0.002 sec)
+Records: 6  Duplicates: 0  Warnings: 0
+
+Query OK, 3 rows affected (0.003 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+Query OK, 2 rows affected (0.001 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+Query OK, 5 rows affected (0.002 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+MariaDB [forums]> SELECT * FROM forums;
++----------+----------+
+| forum_id | name     |
++----------+----------+
+|        5 | CSS      |
+|        4 | HTML     |
+|        6 | Kindling |
+|        1 | MySQL    |
+|        2 | PHP      |
+|        3 | Sports   |
++----------+----------+
+6 rows in set (0.007 sec)
+
+MariaDB [forums]> SELECT user_id, username
+    -> FROM users;
++---------+-----------+
+| user_id | username  |
++---------+-----------+
+|       5 | finchy    |
+|       2 | funny man |
+|       3 | Gareth    |
+|       4 | tim       |
+|       1 | troutster |
++---------+-----------+
+5 rows in set (0.000 sec)
+
+MariaDB [forums]> SELECT message_id, subject, date_entered
+    -> FROM messages
+    -> ORDER BY date_entered DESC
+    -> LIMIT 1;
++------------+------------+---------------------+
+| message_id | subject    | date_entered        |
++------------+------------+---------------------+
+|          5 | PHP Errors | 2026-09-22 18:01:12 |
++------------+------------+---------------------+
+1 row in set (0.000 sec)
+
+MariaDB [forums]> SELECT message_id, subject,
+    -> CONVERT_TZ(date_entered, 'UTC', 'US/Eastern') AS local
+    -> FROM messages
+    -> ORDER BY date_entered DESC
+    -> LIMIT 1;
++------------+------------+-------+
+| message_id | subject    | local |
++------------+------------+-------+
+|          5 | PHP Errors | NULL  |
++------------+------------+-------+
+1 row in set (0.003 sec)
+
+MariaDB [forums]> notee;

@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Caitlin Heird | Resume</title>
+
+    <!-- 
+    Specific tags were asked to be 'Embedded'. I interpreted this as 
+    Internal CSS rather than external. But I do know how to make and reference
+    to external CSS: <link rel="stylesheet" href="styles.css">
+     -->
+
+    <style>
+        h1 {
+            font-size: 40px;
+            color: #8b555e;
+        }
+
+        h2 {
+            font-size: 30px;
+            color: #8b555e;
+        }
+
+        h3 {
+            font-size: 20px;
+            color: #8b555e;
+        }
+
+        p {
+            font-size: 16px;
+            color: black;
+        }
+
+        body {
+            margin: 0;
+            padding: 35px 0;
+            font-family: Arial, sans-serif;
+            background-color: #f5e7e7;
+        }
+
+        main {
+            width: 85%;
+            max-width: 950px;
+            margin: auto;
+            background-color: white;
+            border: 2px solid #8b555e;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 8px 0 #8B555E2E;
+        }
+
+        header {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            padding: 35px;
+        }
+
+        .profile-picture {
+            width: 250px;
+            height: 300px;
+            object-fit: cover;
+            border: 2px solid #8b555e;
+            border-radius: 10px;
+            flex-shrink: 0;
+        }
+
+        .header-info {
+            flex: 1;
+        }
+
+        .header-info h1 {
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        .header-info p,
+        section p {
+            line-height: 1.7;
+        }
+
+        .contact-info {
+            margin-top: 20px;
+            padding-top: 15px;
+        }
+
+        .contact-info p {
+            margin: 6px 0;
+        }
+
+        section {
+            padding: 30px 45px;
+        }
+
+        section h2 {
+            margin: -30px -45px 25px;
+            padding: 15px 45px;
+            background-color: #8b555e;
+            color: white;
+        }
+
+        li {
+            font-size: 16px;
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+
+        .education-date {
+            font-weight: bold;
+        }
+
+        .coursework-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px 50px;
+        }
+
+        .semester-section h3,
+        .job h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .semester-section ol {
+            margin-top: 0;
+        }
+
+        .semester-section li::marker {
+            color: #8b555e;
+            font-weight: bold;
+        }
+
+        .future,
+        .future h3,
+        .future li::marker {
+            color: #999;
+        }
+
+        .skills-list {
+            columns: 2;
+            column-gap: 50px;
+        }
+
+        .certificate-list {
+            margin-top: 10px;
+        }
+
+        .certificate-list a {
+            color: #8b555e;
+            font-weight: bold;
+        }
+
+        .certificate-list a:hover {
+            color: #9a6069;
+        }
+
+        .job {
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+            border-bottom: 1px dashed #c99aa2;
+        }
+
+        .reference-list {
+            columns: 3;
+            column-gap: 30px;
+        }
+
+        .reference-list li {
+            break-inside: avoid;
+            margin-bottom: 20px;
+        }
+
+        .reference-list h3 {
+            margin: 0 0 8px;
+        }
+
+        .reference-list p {
+            margin: 5px 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: #8b555e;
+            font-size: 28px;
+            letter-spacing: 10px;
+        }
+
+        @media (max-width: 700px) {
+            body {
+                padding: 20px 0;
+            }
+
+            main {
+                width: 94%;
+            }
+
+            header {
+                flex-direction: column;
+                text-align: center;
+                padding: 25px;
+            }
+
+            .profile-picture {
+                width: 160px;
+                height: 200px;
+            }
+
+            section {
+                padding: 25px;
+            }
+
+            section h2 {
+                margin: -25px -25px 25px;
+                padding: 15px 25px;
+            }
+
+            .coursework-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .skills-list,
+            .reference-list {
+                columns: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+
+        <header>
+            <img src="Caitlin.jpg" alt="Picture of Myself" class="profile-picture">
+
+            <div class="header-info">
+                <h1>Caitlin Rene'e Heird</h1>
+
+                <p>
+                    Motivated and detail-oriented student pursuing a career in information technology. 
+                    I enjoy learning new technologies and developing my technical skills.
+                </p>
+
+                <div class="contact-info">
+                    <p>Email: cheird0002@kctcs.edu</p>
+                    <p>Phone: (606) 254-7127</p>
+                    <p>Location: Ashland, Kentucky</p>
+                </div>
+            </div>
+        </header>
+
+        <section>
+            <h2>Education</h2>
+
+            <h3>Ashland Community and Technical College</h3>
+
+            <p>Computer Information Technology</p>
+
+            <p class="education-date">Spring 2025 - Present</p>
+
+            <p>
+                Coursework focused on programming, web development, databases, computer hardware, 
+                networking, cybersecurity, and technical support.
+            </p>
+
+            <h3>Achievements and Certifications</h3>
+
+            <p>
+                While pursuing my Computer Information Technology degree, I have maintained my full-time housekeeping 
+                position while balancing my coursework and academic responsibilities. I have maintained Honor Roll status and 
+                was inducted into the Phi Theta Kappa Honor Society. Through my coursework, I have also earned multiple IT-related
+                certifications in computer hardware and software support, software and systems support, and cybersecurity.
+            </p>
+
+            <ul class="certificate-list">
+                <li>
+                    <a href="hardware-software-cert.pdf" target="_blank">CompTIA Competency in IT Hardware and Software Support</a>
+                </li>
+
+                <li>
+                    <a href="software-systems-cert.pdf" target="_blank">CompTIA Competency in IT Software and Systems Support</a>
+                </li>
+
+                <li>
+                    <a href="security-pro-cert.pdf" target="_blank">TestOut Security Pro Certification</a>
+                </li>
+
+                <li>
+                    <a href="ptk-cert.pdf" target="_blank">Phi Theta Kappa Honor Society Certificate</a>
+                </li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Course Work</h2>
+
+            <p>Courses I have taken at Ashland Community and Technical College, listed from earliest to most recent.</p>
+
+            <div class="coursework-grid">
+
+                <div class="semester-section">
+                    <h3>Spring 2025</h3>
+
+                    <ol>
+                        <li>CIT 105: Introduction to Computers</li>
+                        <li>ENG 100: English Workshop</li>
+                        <li>ENG 101: Writing I</li>
+                        <li>HIS 109: History of the US Since 1865</li>
+                        <li>PSY 110: General Psychology</li>
+                    </ol>
+                </div>
+
+                <div class="semester-section">
+                    <h3>Summer 2025</h3>
+
+                    <ol>
+                        <li>AST 101: Frontiers of Astronomy</li>
+                        <li>MAT 126: Technical Algebra & Trig</li>
+                        <li>MAT 126S: Coreq for Tech Alg & Trig</li>
+                    </ol> 
+                </div>
+
+                <div class="semester-section">
+                    <h3>Fall 2025</h3>
+
+                    <ol>
+                        <li>CIT 111: Computer Hardware and Software</li>
+                        <li>CIT 120: Computational Thinking</li>
+                        <li>CIT 161: Introduction to Networks</li>
+                        <li>CIT 170: Database Design Fundamentals</li>
+                    </ol>
+                </div>
+
+                <div class="semester-section">
+                    <h3>Spring 2026</h3>
+
+                    <ol>
+                        <li>CIT 144: Python I</li>
+                        <li>CIT 155: Web Page Development</li>
+                        <li>CIT 180: Security Fundamentals</li>
+                        <li>CIT 232: Help Desk Operations</li>
+                    </ol>
+                </div>
+
+                <div class="semester-section">
+                    <h3>Fall 2026</h3>
+
+                    <ol>
+                        <li>CIT 143: C# I</li>
+                        <li>CIT 244: Python II</li>
+                        <li>CIT 253: Data Driven Web Pages</li>
+                    </ol>
+                </div>
+
+                <div class="semester-section future">
+                    <h3>Spring 2027</h3>
+
+                    <ol>
+                        <li>CIT ###: Future Course</li>
+                        <li>CIT ###: Future Course</li>
+                        <li>CIT ###: Future Course</li>
+                    </ol>
+                </div>
+
+            </div>
+        </section>
+
+        <section>
+            <h2>Technical Skills</h2>
+
+            <p>Technical skills I have developed through coursework and hands-on learning.</p>
+
+            <ul class="skills-list">
+                <li>HTML and CSS</li>
+                <li>JavaScript</li>
+                <li>Python</li>
+                <li>C#</li>
+                <li>Database Design</li>
+                <li>Computer Hardware</li>
+                <li>Networking</li>
+                <li>Cybersecurity Fundamentals</li>
+                <li>Troubleshooting</li>
+                <li>Technical Support</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Work Experience</h2>
+
+            <p>
+                My work experience has helped me develop strong skills in responsibility, organization, problem-solving, 
+                time management, and working independently in professional environments.
+            </p>
+
+            <div class="job">
+                <h3>Housekeeper | Hempton Management Systems</h3>
+
+                <p>October 2022 - Present</p>
+
+                <p>
+                    I work independently as a housekeeper for Hempton Management Systems, a contract housekeeping company 
+                    serving businesses and medical facilities throughout the region. My responsibilities include maintaining 
+                    multiple areas of a facility, managing cleaning supplies, handling waste according to proper procedures, 
+                    and ensuring each assigned area is completed to a high standard. My current position requires me to manage 
+                    responsibilities across several locations within the same facility while staying organized, working 
+                    efficiently, and maintaining consistent quality with minimal supervision.
+                </p>
+            </div>
+
+            <div class="job">
+                <h3>Baker | Texas Roadhouse</h3>
+
+                <p>February 2022 - May 2022</p>
+
+                <p>
+                    As a baker at Texas Roadhouse, I worked in a fast-paced environment where efficiency, accuracy, and time 
+                    management were essential. My responsibilities included preparing and baking large quantities of rolls, 
+                    mixing and preparing dough for current and future shifts, and ensuring orders were completed on time. 
+                    This position strengthened my ability to work under pressure, follow established procedures, manage multiple 
+                    tasks, and maintain productivity during busy periods.
+                </p>
+            </div>
+        </section>
+
+        <section>
+            <h2>Professional Interests</h2>
+
+            <p>I am interested in continuing to develop my technical skills and pursuing a career in the technology field.</p>
+
+            <ol>
+                <li>Software Development</li>
+                <li>Web Development</li>
+                <li>IT Support</li>
+            </ol>
+        </section>
+
+        <section>
+            <h2>References</h2>
+
+            <p>
+                The following are example references used for this assignment. 
+                Legendary female pioneers who shaped the foundations of computer science and software engineering.
+            </p>
+
+            <ul class="reference-list">
+                <li>
+                    <h3>Ada Lovelace</h3>
+                    <p>Phone: (555) 123-4567</p>
+                </li>
+
+                <li>
+                    <h3>Grace Hopper</h3>
+                    <p>Phone: (555) 234-5678</p>
+                </li>
+
+                <li>
+                    <h3>Margaret Hamilton</h3>
+                    <p>Phone: (555) 345-6789</p>
+                </li>
+            </ul>
+        </section>
+
+        <footer>
+            ♡ ♡ ♡
+        </footer>
+
+    </main>
+</body>
+
+</html>

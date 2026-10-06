@@ -1,0 +1,73 @@
+MariaDB [forums]> ALTER TABLE messages
+    -> ADD FULLTEXT(body, subject);
+Query OK, 0 rows affected (0.126 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [forums]> SELECT message_id, subject,
+    -> MATCH(body, subject) AGAINST('database') AS Relevance
+    -> FROM messages
+    -> WHERE MATCH(body, subject) AGAINST('database');
++------------+-----------------+--------------------+
+| message_id | subject         | Relevance          |
++------------+-----------------+--------------------+
+|          2 | Database Design | 0.0984337329864502 |
+|          3 | Database Design | 0.0984337329864502 |
+|          4 | Database Design | 0.0492168664932251 |
++------------+-----------------+--------------------+
+3 rows in set (0.001 sec)
+
+MariaDB [forums]> SELECT message_id, subject,
+    -> MATCH(body, subject) AGAINST('database design') AS Relevance
+    -> FROM messages
+    -> WHERE MATCH(body, subject) AGAINST('database design');
++------------+-----------------+--------------------+
+| message_id | subject         | Relevance          |
++------------+-----------------+--------------------+
+|          2 | Database Design | 0.1476505994796753 |
+|          3 | Database Design | 0.1476505994796753 |
+|          4 | Database Design | 0.0984337329864502 |
++------------+-----------------+--------------------+
+3 rows in set (0.001 sec)
+
+MariaDB [forums]> SELECT message_id, subject,
+    -> MATCH(body, subject) AGAINST('database') AS Relevance
+    -> FROM messages
+    -> WHERE MATCH(body, subject) AGAINST('database')
+    -> ORDER BY Relevance DESC;
++------------+-----------------+--------------------+
+| message_id | subject         | Relevance          |
++------------+-----------------+--------------------+
+|          3 | Database Design | 0.0984337329864502 |
+|          2 | Database Design | 0.0984337329864502 |
+|          4 | Database Design | 0.0492168664932251 |
++------------+-----------------+--------------------+
+3 rows in set (0.001 sec)
+
+MariaDB [forums]> OPTIMIZE TABLE messages;
++-----------------+----------+----------+-------------------------------------------------------------------+
+| Table           | Op       | Msg_type | Msg_text                                                          |
++-----------------+----------+----------+-------------------------------------------------------------------+
+| forums.messages | optimize | note     | Table does not support optimize, doing recreate + analyze instead |
+| forums.messages | optimize | status   | OK                                                                |
++-----------------+----------+----------+-------------------------------------------------------------------+
+2 rows in set (0.134 sec)
+
+MariaDB [forums]> ANALYZE TABLE messages;
++-----------------+---------+----------+----------+
+| Table           | Op      | Msg_type | Msg_text |
++-----------------+---------+----------+----------+
+| forums.messages | analyze | status   | OK       |
++-----------------+---------+----------+----------+
+1 row in set (0.006 sec)
+
+MariaDB [forums]> EXPLAIN SELECT message_id, subject
+    -> FROM messages
+    -> WHERE forum_id = 1;
++------+-------------+----------+------+---------------+------+---------+------+------+-------------+
+| id   | select_type | table    | type | possible_keys | key  | key_len | ref  | rows | Extra       |
++------+-------------+----------+------+---------------+------+---------+------+------+-------------+
+|    1 | SIMPLE      | messages | ALL  | forum_id      | NULL | NULL    | NULL | 5    | Using where |
++------+-------------+----------+------+---------------+------+---------+------+------+-------------+
+1 row in set (0.002 sec)
+
+MariaDB [forums]> notee;

@@ -1,0 +1,162 @@
+MariaDB [(none)]> source createSitenameDatabase.sql;
+ERROR 1007 (HY000): Can't create database 'sitename'; database exists
+Database changed
+MariaDB [sitename]> source createUsersTable.sql;
+ERROR 1050 (42S01): Table 'users' already exists
+MariaDB [sitename]> SHOW TABLES;
++--------------------+
+| Tables_in_sitename |
++--------------------+
+| users              |
++--------------------+
+1 row in set (0.001 sec)
+
+MariaDB [sitename]> SHOW COLUMNS FROM users;
++-------------------+-----------------------+------+-----+---------+----------------+
+| Field             | Type                  | Null | Key | Default | Extra          |
++-------------------+-----------------------+------+-----+---------+----------------+
+| user_id           | mediumint(8) unsigned | NO   | PRI | NULL    | auto_increment |
+| first_name        | varchar(20)           | NO   |     | NULL    |                |
+| last_name         | varchar(40)           | NO   |     | NULL    |                |
+| email             | varchar(60)           | NO   |     | NULL    |                |
+| pass              | char(128)             | NO   |     | NULL    |                |
+| registration_date | datetime              | NO   |     | NULL    |                |
++-------------------+-----------------------+------+-----+---------+----------------+
+6 rows in set (0.019 sec)
+
+MariaDB [sitename]> source insertUsers.sql;
+Query OK, 1 row affected (0.002 sec)
+
+Query OK, 1 row affected (0.001 sec)
+
+Query OK, 4 rows affected (0.001 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+Query OK, 10 rows affected (0.001 sec)
+Records: 10  Duplicates: 0  Warnings: 0
+
+MariaDB [sitename]> SELECT * FROM users;
++---------+-------------+-----------+-------------------------------+----------------------------------------------------------------------------------------------------------------------------------+---------------------+
+| user_id | first_name  | last_name | email                         | pass                                                                                                                             | registration_date   |
++---------+-------------+-----------+-------------------------------+----------------------------------------------------------------------------------------------------------------------------------+---------------------+
+|       1 | Larry       | Ullman    | email@example.com             | 1c573dfeb388b562b55948af954a7b344dde1cc2099e978a992790429e7c01a4205506a93d9aef3bab32d6f06d75b7777a7ad8859e672fedb6a096ae369254d2 | 2026-09-15 14:50:30 |
+|       2 | Zoe         | Isabella  | email2@example.com            | 88ad80e3600c1be894d41dc8f25d30f7e61f5d11ebd94b6b781caf5f8c2d866521c4697892f328441a14ae840560fb367fcf73303968d3a1fa02e13994e32f71 | 2026-09-15 14:50:30 |
+|       3 | John        | Lennon    | john@beatles.com              | 363dc58074a3857913f3a5dfcef1d5552bd5a7b483c50764564c9b7802d518fb5fd2099eb7798414e93b9dae0f805b0910c4e6e361943aaf1d1dcde5ea052e83 | 2026-09-15 14:50:30 |
+|       4 | Paul        | McCartney | paul@beatles.com              | 586d338f0c7f815c9a3f94f29384d05a5b00a2e48aedc5cbe42ed9b8ebf76418bc41a657d69191f33b89c2ca56119a25b4446e152af6cbfade37e7a546e8a46e | 2026-09-15 14:50:30 |
+|       5 | George      | Harrison  | george@beatles.com            | 983d43ddff6da90f6a5d3b6172446a1ffe228b803fe64fdd5dcfab5646078a896851fe82f623c9d6e5654b3d2f363a04ec17cfb62b607437a9c7c132d511e522 | 2026-09-15 14:50:30 |
+|       6 | Ringo       | Starr     | ringo@beatles.com             | b39138cde67de7ba76ae8c1fcc010e166ad68fb2b054ddbc2a6b651ed11724e69260b1062bd4a310e3ad55f043325e7a7f0344efe4fdcf5bc3a8c424fa25f5e0 | 2026-09-15 14:50:30 |
+|       7 | Emily       | Carter    | emily.carter@example.com      | e89ca7ebc5a9491277be5f814cb64a99d0177450fb3fa155b03efc68b7ee0bc32fb69368a38c827650aecd4587180f59ffa0e5a51d986e0615bafa3f087373a3 | 2026-09-15 14:50:30 |
+|       8 | Daniel      | Brooks    | daniel.brooks@example.com     | a9c09df0de4c29a62502e016098de038387835b010493d78e9c8b93a3b4296b2ee7d335e26c798622091b31382f4740a044a52b5b9c939bcedf9d636248bcff5 | 2026-09-15 14:50:30 |
+|       9 | Samantha    | Reed      | samantha.reed@example.com     | 7924b792b1fa2078f3c0ed3ffeeeb65ed05455f9dfd08bb0bbc08277554d3537ffc2444f3f0e3f2f48a2d97536a2ff46366b97fc6b247e25fab0e692310a9d18 | 2026-09-15 14:50:30 |
+|      10 | Michael     | Turner    | michael.turner@example.com    | a336f671080fbf4f2a230f313560ddf0d0c12dfcf1741e49e8722a234673037dc493caa8d291d8025f71089d63cea809cc8ae53e5b17054806837dbe4099c4ca | 2026-09-15 14:50:30 |
+|      11 | Jessica     | Morgan    | jessica.morgan@example.com    | d69f1fe59dbcb1727da5e6fa39888f08bfbc970a30685e609d441a34c47ea32e720d805116128ef2ae57ad284b632ec348fe0b4a40dd13529584304b539de48b | 2026-09-15 14:50:30 |
+|      12 | Ryan        | Foster    | ryan.foster@example.com       | 7ee83a6a16d9169c49565ff7f5f0adece6ec50285d4a9c647b56848d2dfb36ecde341344a1e67e2941a4477daf141df855492dc73138a20c6be25d328b7f716e | 2026-09-15 14:50:30 |
+|      13 | Ashley      | Parker    | ashley.parker@example.com     | 0eeb42f3ca3f0e7c67334918cb0baec1b03125147194053fca2795947af33759f511b27727a0990b0973f21e9c00248f30daa599f376e8e9ba34b029b380ebb5 | 2026-09-15 14:50:30 |
+|      14 | Matthew     | Collins   | matthew.collins@example.com   | 591876b12eb1d26f80f3cde5b50111397b383e0294dabd580ca57d4086c74235fdc6fb4ea8cafee67fb9492c0a45df22a95eb2715a0cd1cf26afba7e379181fd | 2026-09-15 14:50:30 |
+|      15 | Lauren      | Bennett   | lauren.bennett@example.com    | 80f25ba7e6cbbb7cd1ca1cbb58894f088559b248bdde8da0a81c344710279a202d8974d236a0cdf7b77dd4fbb7594e2d952e3945c217cc7e9824ca7972ad3c6a | 2026-09-15 14:50:30 |
+|      16 | Christopher | Hayes     | christopher.hayes@example.com | 7e819fcf294a99a01e2550345970777369f493430d525efe3bf38cb50e44d308064d22e84da1f0a611928e47a0ffce13a4ba809f87ac545d8a564e0a22dfc04b | 2026-09-15 14:50:30 |
++---------+-------------+-----------+-------------------------------+----------------------------------------------------------------------------------------------------------------------------------+---------------------+
+16 rows in set (0.001 sec)
+
+MariaDB [sitename]> SELECT first_name, last_name
+    -> FROM users;
++-------------+-----------+
+| first_name  | last_name |
++-------------+-----------+
+| Larry       | Ullman    |
+| Zoe         | Isabella  |
+| John        | Lennon    |
+| Paul        | McCartney |
+| George      | Harrison  |
+| Ringo       | Starr     |
+| Emily       | Carter    |
+| Daniel      | Brooks    |
+| Samantha    | Reed      |
+| Michael     | Turner    |
+| Jessica     | Morgan    |
+| Ryan        | Foster    |
+| Ashley      | Parker    |
+| Matthew     | Collins   |
+| Lauren      | Bennett   |
+| Christopher | Hayes     |
++-------------+-----------+
+16 rows in set (0.001 sec)
+
+MariaDB [sitename]> SELECT first_name, last_name, email
+    -> FROM users
+    -> WHERE first_name = 'John';
++------------+-----------+------------------+
+| first_name | last_name | email            |
++------------+-----------+------------------+
+| John       | Lennon    | john@beatles.com |
++------------+-----------+------------------+
+1 row in set (0.001 sec)
+
+MariaDB [sitename]> SELECT * FROM users
+    -> WHERE last_name LIKE 'C%';
++---------+------------+-----------+-----------------------------+----------------------------------------------------------------------------------------------------------------------------------+---------------------+
+| user_id | first_name | last_name | email                       | pass                                                                                                                             | registration_date   |
++---------+------------+-----------+-----------------------------+----------------------------------------------------------------------------------------------------------------------------------+---------------------+
+|       7 | Emily      | Carter    | emily.carter@example.com    | e89ca7ebc5a9491277be5f814cb64a99d0177450fb3fa155b03efc68b7ee0bc32fb69368a38c827650aecd4587180f59ffa0e5a51d986e0615bafa3f087373a3 | 2026-09-15 14:50:30 |
+|      14 | Matthew    | Collins   | matthew.collins@example.com | 591876b12eb1d26f80f3cde5b50111397b383e0294dabd580ca57d4086c74235fdc6fb4ea8cafee67fb9492c0a45df22a95eb2715a0cd1cf26afba7e379181fd | 2026-09-15 14:50:30 |
++---------+------------+-----------+-----------------------------+----------------------------------------------------------------------------------------------------------------------------------+---------------------+
+2 rows in set (0.001 sec)
+
+MariaDB [sitename]> SELECT first_name, last_name
+    -> FROM users
+    -> WHERE email NOT LIKE '@beatles.com';
++-------------+-----------+
+| first_name  | last_name |
++-------------+-----------+
+| Larry       | Ullman    |
+| Zoe         | Isabella  |
+| John        | Lennon    |
+| Paul        | McCartney |
+| George      | Harrison  |
+| Ringo       | Starr     |
+| Emily       | Carter    |
+| Daniel      | Brooks    |
+| Samantha    | Reed      |
+| Michael     | Turner    |
+| Jessica     | Morgan    |
+| Ryan        | Foster    |
+| Ashley      | Parker    |
+| Matthew     | Collins   |
+| Lauren      | Bennett   |
+| Christopher | Hayes     |
++-------------+-----------+
+16 rows in set (0.000 sec)
+
+MariaDB [sitename]> SELECT first_name, last_name
+    -> FROM users WHERE
+    -> email NOT LIKE '%beatles.com';
++-------------+-----------+
+| first_name  | last_name |
++-------------+-----------+
+| Larry       | Ullman    |
+| Zoe         | Isabella  |
+| George      | Harrison  |
+| Emily       | Carter    |
+| Daniel      | Brooks    |
+| Samantha    | Reed      |
+| Michael     | Turner    |
+| Jessica     | Morgan    |
+| Ryan        | Foster    |
+| Ashley      | Parker    |
+| Matthew     | Collins   |
+| Lauren      | Bennett   |
+| Christopher | Hayes     |
++-------------+-----------+
+13 rows in set (0.000 sec)
+
+MariaDB [sitename]> SELECT * FROM users WHERE
+    -> last_name = 'Starr'
+    -> ORDER BY first_name;
++---------+------------+-----------+-------------------+----------------------------------------------------------------------------------------------------------------------------------+---------------------+
+| user_id | first_name | last_name | email             | pass                                                                                                                             | registration_date   |
++---------+------------+-----------+-------------------+----------------------------------------------------------------------------------------------------------------------------------+---------------------+
+|       6 | Ringo      | Starr     | ringo@beatles.com | b39138cde67de7ba76ae8c1fcc010e166ad68fb2b054ddbc2a6b651ed11724e69260b1062bd4a310e3ad55f043325e7a7f0344efe4fdcf5bc3a8c424fa25f5e0 | 2026-09-15 14:50:30 |
++---------+------------+-----------+-------------------+----------------------------------------------------------------------------------------------------------------------------------+---------------------+
+1 row in set (0.001 sec)
+
+MariaDB [sitename]> notee

@@ -1,0 +1,262 @@
+MariaDB [(none)]> SOURCE C:/Users/tgbar/OneDrive/Desktop/CIT253_Assignment05_CaitlinHeird/chapter6_banking.sql;
+Query OK, 1 row affected (0.002 sec)
+
+Database changed
+Charset changed
+Query OK, 0 rows affected (0.033 sec)
+
+Query OK, 0 rows affected (0.022 sec)
+
+Query OK, 0 rows affected (0.024 sec)
+
+Query OK, 3 rows affected (0.002 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+Query OK, 3 rows affected (0.002 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+Query OK, 1 row affected (0.003 sec)
+
+MariaDB [banking]> SELECT COUNT(*) FROM customers;
++----------+
+| COUNT(*) |
++----------+
+|        3 |
++----------+
+1 row in set (0.000 sec)
+
+MariaDB [banking]> SELECT SUM(balance) AS Total,
+    -> COUNT(account_id) AS Number,
+    -> customer_id
+    -> FROM accounts
+    -> GROUP BY (customer_id);
++-----------+--------+-------------+
+| Total     | Number | customer_id |
++-----------+--------+-------------+
+|   5460.23 |      1 |           1 |
+| 922872.21 |      2 |           2 |
+|    892.00 |      1 |           3 |
++-----------+--------+-------------+
+3 rows in set (0.000 sec)
+
+MariaDB [banking]> SELECT SUM(balance) AS Total,
+    -> COUNT(account_id) AS Number,
+    -> CONCAT(c.last_name, ', ', c.first_name) AS Name
+    -> FROM accounts AS a
+    -> INNER JOIN customers AS c
+    -> USING (customer_id)
+    -> GROUP BY (a.customer_id)
+    -> ORDER BY Name;
++-----------+--------+----------------+
+| Total     | Number | Name           |
++-----------+--------+----------------+
+|    892.00 |      1 | Nnamdi, Kojo   |
+| 922872.21 |      2 | Sedaris, David |
+|   5460.23 |      1 | Vowell, Sarah  |
++-----------+--------+----------------+
+3 rows in set (0.001 sec)
+
+MariaDB [banking]> SELECT GROUP_CONCAT(balance),
+    -> CONCAT(c.last_name, ', ', c.first_name) AS Name
+    -> FROM accounts AS a
+    -> INNER JOIN customers AS c
+    -> USING (customer_id)
+    -> GROUP BY (a.customer_id)
+    -> ORDER BY Name;
++-----------------------+----------------+
+| GROUP_CONCAT(balance) | Name           |
++-----------------------+----------------+
+| 892.00                | Nnamdi, Kojo   |
+| 909325.24,13546.97    | Sedaris, David |
+| 5460.23               | Vowell, Sarah  |
++-----------------------+----------------+
+3 rows in set (0.016 sec)
+
+MariaDB [banking]> SELECT AVG(balance) FROM accounts;
++---------------+
+| AVG(balance)  |
++---------------+
+| 232306.110000 |
++---------------+
+1 row in set (0.001 sec)
+
+MariaDB [banking]> SELECT MAX(balance), MIN(balance) FROM accounts;
++--------------+--------------+
+| MAX(balance) | MIN(balance) |
++--------------+--------------+
+|    909325.24 |       892.00 |
++--------------+--------------+
+1 row in set (0.000 sec)
+
+MariaDB [banking]> SELECT COUNT(*) FROM accounts;
++----------+
+| COUNT(*) |
++----------+
+|        4 |
++----------+
+1 row in set (0.001 sec)
+
+MariaDB [banking]> SELECT COUNT(customer_id) FROM accounts;
++--------------------+
+| COUNT(customer_id) |
++--------------------+
+|                  4 |
++--------------------+
+1 row in set (0.000 sec)
+
+MariaDB [banking]> SELECT COUNT(DISTINCT customer_id) FROM accounts;
++-----------------------------+
+| COUNT(DISTINCT customer_id) |
++-----------------------------+
+|                           3 |
++-----------------------------+
+1 row in set (0.000 sec)
+
+MariaDB [banking]> SELECT AVG(balance), customer_id
+    -> FROM accounts
+    -> GROUP BY customer_id;
++---------------+-------------+
+| AVG(balance)  | customer_id |
++---------------+-------------+
+|   5460.230000 |           1 |
+| 461436.105000 |           2 |
+|    892.000000 |           3 |
++---------------+-------------+
+3 rows in set (0.000 sec)
+
+MariaDB [banking]> START TRANSACTION;
+Query OK, 0 rows affected (0.000 sec)
+
+MariaDB [banking]> SELECT * FROM accounts;
++------------+-------------+----------+-----------+
+| account_id | customer_id | type     | balance   |
++------------+-------------+----------+-----------+
+|          1 |           1 | Checking |   5460.23 |
+|          2 |           2 | Checking | 909325.24 |
+|          3 |           3 | Checking |    892.00 |
+|          4 |           2 | Savings  |  13546.97 |
++------------+-------------+----------+-----------+
+4 rows in set (0.000 sec)
+
+MariaDB [banking]> UPDATE accounts
+    -> SET balance = balance - 100
+    -> WHERE account_id = 2;
+Query OK, 1 row affected (0.001 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [banking]> UPDATE accounts
+    -> SET balance = balance + 100
+    -> WHERE account_id = 1;
+Query OK, 1 row affected (0.000 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [banking]> SELECT * FROM accounts;
++------------+-------------+----------+-----------+
+| account_id | customer_id | type     | balance   |
++------------+-------------+----------+-----------+
+|          1 |           1 | Checking |   5560.23 |
+|          2 |           2 | Checking | 909225.24 |
+|          3 |           3 | Checking |    892.00 |
+|          4 |           2 | Savings  |  13546.97 |
++------------+-------------+----------+-----------+
+4 rows in set (0.000 sec)
+
+MariaDB [banking]> ROLLBACK;
+Query OK, 0 rows affected (0.001 sec)
+
+MariaDB [banking]> SELECT * FROM accounts;
++------------+-------------+----------+-----------+
+| account_id | customer_id | type     | balance   |
++------------+-------------+----------+-----------+
+|          1 |           1 | Checking |   5460.23 |
+|          2 |           2 | Checking | 909325.24 |
+|          3 |           3 | Checking |    892.00 |
+|          4 |           2 | Savings  |  13546.97 |
++------------+-------------+----------+-----------+
+4 rows in set (0.001 sec)
+
+MariaDB [banking]> START TRANSACTION;
+Query OK, 0 rows affected (0.000 sec)
+
+MariaDB [banking]> UPDATE accounts
+    -> SET balance = balance - 100
+    -> WHERE account_id = 2;
+Query OK, 1 row affected (0.001 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [banking]> UPDATE accounts
+    -> SET balance = balance + 100
+    -> WHERE account_id = 1;
+Query OK, 1 row affected (0.000 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [banking]> SELECT * FROM accounts;
++------------+-------------+----------+-----------+
+| account_id | customer_id | type     | balance   |
++------------+-------------+----------+-----------+
+|          1 |           1 | Checking |   5560.23 |
+|          2 |           2 | Checking | 909225.24 |
+|          3 |           3 | Checking |    892.00 |
+|          4 |           2 | Savings  |  13546.97 |
++------------+-------------+----------+-----------+
+4 rows in set (0.000 sec)
+
+MariaDB [banking]> COMMIT;
+Query OK, 0 rows affected (0.001 sec)
+
+MariaDB [banking]> SELECT * FROM accounts;
++------------+-------------+----------+-----------+
+| account_id | customer_id | type     | balance   |
++------------+-------------+----------+-----------+
+|          1 |           1 | Checking |   5560.23 |
+|          2 |           2 | Checking | 909225.24 |
+|          3 |           3 | Checking |    892.00 |
+|          4 |           2 | Savings  |  13546.97 |
++------------+-------------+----------+-----------+
+4 rows in set (0.003 sec)
+
+MariaDB [banking]> ALTER TABLE customers
+    -> ADD COLUMN pin VARBINARY(16)
+    -> NOT NULL;
+Query OK, 0 rows affected (0.006 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [banking]> ALTER TABLE customers
+    -> ADD COLUMN nacl VARBINARY(64)
+    -> NOT NULL;
+Query OK, 0 rows affected (0.008 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [banking]> UPDATE customers SET nacl =
+    -> UNHEX(SHA2(RAND(), 512))
+    -> WHERE customer_id=1;
+Query OK, 1 row affected (0.002 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [banking]> UPDATE customers SET
+    -> pin=AES_ENCRYPT(1234, nacl)
+    -> WHERE customer_id=1;
+Query OK, 1 row affected (0.001 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [banking]> SELECT customer_id,
+    -> AES_DECRYPT(pin,nacl) AS pin
+    -> FROM customers
+    -> WHERE customer_id=1;
++-------------+------+
+| customer_id | pin  |
++-------------+------+
+|           1 | 1234 |
++-------------+------+
+1 row in set (0.000 sec)
+
+MariaDB [banking]> SELECT * FROM customers
+    -> WHERE customer_id=1;
++-------------+------------+-----------+------------------+------------------------------------------------------------------+
+| customer_id | first_name | last_name | pin              | nacl                                                             |
++-------------+------------+-----------+------------------+------------------------------------------------------------------+
+|           1 | Sarah      | Vowell    | »&∫=Mï…¢¶Ñ9"        | r€üÅöˆ\±§:˘Äbq\2ë5Bñ<¸z≤ö Ωíı0èÈ¥DE¿åqyÎ˛W!‘~ö°ÀQ©“ø5k|-´¥¬1                                 |
++-------------+------------+-----------+------------------+------------------------------------------------------------------+
+1 row in set (0.000 sec)
+
+MariaDB [banking]> notee;
